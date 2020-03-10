@@ -4,17 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Music art</title>
-    <style>
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    </style>
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="sContainer"></div>
+    <div id="sContainer" class="sContainer">
+      <div class="audio-control">
+        <i class="fas fa-play-circle fa-5x playBtn"></i>
+      </div>
+    </div>
 
+    <script
+      src="https://kit.fontawesome.com/089ad18a01.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/addons/p5.sound.js"></script>
     <script src="sketch_test.js"></script>

@@ -21,7 +21,7 @@ let sketch = function(s) {
     s.background(0);
     //fade = 0;
 
-    startBtn = s.createButton("Play song");
+    // startBtn = s.createButton("Play song");
     mySong.setVolume(1);
 
     //console.log(mySong.duration());
@@ -29,9 +29,9 @@ let sketch = function(s) {
     amp = new p5.Amplitude();
     amp.setInput(mySong);
 
-    startBtn.mousePressed(function() {
-      mySong.play();
-    });
+    // startBtn.mousePressed(function() {
+    //   mySong.play();
+    // });
 
     canvas.mouseClicked(function() {
       if (mySong.isPlaying()) {

@@ -1,5 +1,6 @@
 const container = document.querySelector("#sContainer");
 const audioControl = container.querySelector(".audio-control");
+const playPauseBox = container.querySelector(".playPauseBox");
 const playBtn = audioControl.querySelector(".playBtn");
 const pauseBtn = audioControl.querySelector(".pauseBtn");
 
@@ -36,13 +37,21 @@ let sketch = function(s) {
     //   mySong.play();
     // });
 
-    canvas.mouseClicked(function() {
+    playPauseBox.addEventListener("click", () => {
       if (mySong.isPlaying()) {
         mySong.pause();
       } else {
         mySong.play();
       }
     });
+
+    // playPauseBox.mouseClicked(function() {
+    //   if (mySong.isPlaying()) {
+    //     mySong.pause();
+    //   } else {
+    //     mySong.play();
+    //   }
+    // });
   };
   s.draw = function() {
     let volume = amp.getLevel();

@@ -46,3 +46,6 @@ body {
 .audioctrl-btn:hover {
   cursor: pointer;
 }
+.hide {
+  display: none;
+}

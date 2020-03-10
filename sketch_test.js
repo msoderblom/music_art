@@ -1,4 +1,7 @@
 const container = document.querySelector("#sContainer");
+const audioControl = container.querySelector(".audio-control");
+const playBtn = audioControl.querySelector(".playBtn");
+const pauseBtn = audioControl.querySelector(".pauseBtn");
 
 let sketch = function(s) {
   let mySong;

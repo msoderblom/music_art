@@ -3,19 +3,19 @@ const audioControl = container.querySelector(".audio-control");
 const playPauseBox = container.querySelector(".playPauseBox");
 const playBtn = audioControl.querySelector(".playBtn");
 const pauseBtn = audioControl.querySelector(".pauseBtn");
+const restartAllBtn = audioControl.querySelector(".restartAllBtn");
+const restartMusicBtn = audioControl.querySelector(".restartMusicBtn");
 
 let sketch = function(s) {
   let mySong;
-  let sum;
   let t1 = 0;
   let t2 = 0;
   let t3 = 0;
   let t4 = 0;
-  let fade;
   let amp;
   let canvas;
-  let startBtn;
-  let startVar = false;
+  let hasStarted = false;
+
   s.preload = function() {
     s.soundFormats("mp3");
     mySong = s.loadSound("./assets/drunk_in_love.mp3");
@@ -37,13 +37,12 @@ let sketch = function(s) {
     //   mySong.play();
     // });
 
-    playPauseBox.addEventListener("click", () => {
-      if (mySong.isPlaying()) {
-        mySong.pause();
-      } else {
-        mySong.play();
-      }
-    });
+    //playPauseBox.addEventListener("click", pausePlayHandler);
+    playBtn.addEventListener("click", pausePlayHandler);
+    pauseBtn.addEventListener("click", pausePlayHandler);
+
+    restartMusicBtn.addEventListener("click", restartMusic);
+    restartAllBtn.addEventListener("click", restartAll);
 
     // playPauseBox.mouseClicked(function() {
     //   if (mySong.isPlaying()) {
@@ -103,6 +102,67 @@ let sketch = function(s) {
     s.stroke(255, 0, 0); // Färgar kanten röd
     s.ellipse(x, y, size / 2, size / 2); // Ritar upp cirkeln/cirklarna. Storleken är dividerad med 2 för att de ska vara mindre än hjärtat
   }
+  function pausePlayHandler(e) {
+    console.log(mySong);
+
+    if (this.id === "playBtn") {
+      mySong.mode = "sustain";
+      mySong.play();
+      playBtn.classList.toggle("hide");
+      pauseBtn.classList.toggle("hide");
+    } else if (this.id === "pauseBtn") {
+      mySong.pause();
+      playBtn.classList.toggle("hide");
+      pauseBtn.classList.toggle("hide");
+    }
+
+    // if (!hasStarted) {
+    //   mySong.play();
+    //   hasStarted = true;
+    //   console.log("first start");
+    // }
+
+    // if (mySong.isPlaying()) {
+    //   mySong.pause();
+    //   playBtn.classList.toggle("hide");
+    //   pauseBtn.classList.toggle("hide");
+    // } else if (mySong.isPaused()) {
+    //   playMode = "sustain";
+    //   mySong.play();
+    //   playBtn.classList.toggle("hide");
+    //   pauseBtn.classList.toggle("hide");
+    // }
+  }
+
+  function restartMusic() {
+    console.log(mySong);
+    mySong.jump(0);
+
+    // needed to work around not being able to pause after calling jump()
+    setTimeout(function() {
+      Object.assign(mySong, { _playing: true });
+    }, 100);
+
+    playBtn.classList.add("hide");
+    pauseBtn.classList.remove("hide");
+  }
+  function restartAll() {
+    s.setup();
+  }
 };
 
 new p5(sketch, container);
+
+// let silder = createSlider(0,1,0.5,0.01);
+// mySong.setVolume(silder.value());
+
+// kan sätta en callback på loadSound, kan göra en egen loading i canvas
+// mySong = s.loadSound("./assets/drunk_in_love.mp3", s.draw);
+
+/*
+let sliderRate = createSlider(0,1.5,1,0.01)
+mySong.rate(sliderRate.value())
+
+
+
+*/

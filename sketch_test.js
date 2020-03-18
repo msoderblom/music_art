@@ -21,6 +21,8 @@ let sketch = function(s) {
     mySong = s.loadSound("./assets/drunk_in_love.mp3");
   };
   s.setup = function() {
+    // s.soundFormats("mp3");
+    // mySong = s.loadSound("./assets/drunk_in_love.mp3", loadScreen);
     canvas = s.createCanvas(700, 700);
     s.background(0);
     //fade = 0;
@@ -148,7 +150,15 @@ let sketch = function(s) {
   }
   function restartAll() {
     s.setup();
+    restartMusic();
   }
+
+  // function loadScreen() {
+  //   console.log("loading");
+
+  //   // container.innerHTML =
+  //   //   '<div class="lds-ripple"><div></div><div></div></div>';
+  // }
 };
 
 new p5(sketch, container);

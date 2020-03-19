@@ -117,7 +117,7 @@ let sketch = function(s) {
     s.stroke(255, 0, 0); // Färgar kanten röd
     s.ellipse(x, y, size / 2, size / 2); // Ritar upp cirkeln/cirklarna. Storleken är dividerad med 2 för att de ska vara mindre än hjärtat
   }
-  function pausePlayHandler(e) {
+  function pausePlayHandler() {
     console.log(mySong);
 
     if (this.id === "playBtn") {
@@ -134,18 +134,26 @@ let sketch = function(s) {
 
   function restartMusic() {
     console.log(mySong);
-    mySong.jump(0);
+    // mySong.jump(0);
 
     // needed to work around not being able to pause after calling jump()
     setTimeout(function() {
       Object.assign(mySong, { _playing: true });
+      mySong.playMode("restart");
     }, 100);
+    mySong.stop();
+    mySong.play();
+    mySong.playMode("sustain");
 
     playBtn.classList.add("hide");
     pauseBtn.classList.remove("hide");
   }
   function restartAll() {
-    s.setup();
+    s.background(0);
+    // mySong.jump(0);
+    // mySong.stop();
+    // mySong.play();
+    // needed to work around not being able to pause after calling jump()
     restartMusic();
   }
 
